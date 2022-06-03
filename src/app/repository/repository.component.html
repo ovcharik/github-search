@@ -1,0 +1,55 @@
+<mat-card>
+  <!-- Avatar, name and owner -->
+  <mat-card-header>
+    <img mat-card-avatar [src]="repository.owner.avatar_url" />
+    <mat-card-title>
+      <a [href]="repository.html_url" target="_blank">
+        {{ repository.name }}
+      </a>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <span>by </span>
+      <a [href]="repository.owner.html_url" target="_blank">
+        {{ repository.owner.login }}
+      </a>
+      <mat-icon (click)="search.next('user:' + repository.owner.login)">
+        filter_alt
+      </mat-icon>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <!-- Repository info -->
+  <mat-card-content>
+    <p *ngIf="repository.description">{{ repository.description }}</p>
+
+    <p *ngIf="repository.topics?.length">
+      <mat-chip-list class="search-result-topics">
+        <mat-chip
+          *ngFor="let topic of repository.topics"
+          (click)="search.next('topic:' + topic)"
+        >
+          {{ topic }}
+        </mat-chip>
+      </mat-chip-list>
+    </p>
+
+    <div class="search-result-info">
+      <div class="search-result-info-item" title="Stars">
+        <mat-icon>star</mat-icon>
+        <span> {{ repository.stargazers_count | number }}</span>
+      </div>
+      <div class="search-result-info-item" title="Forks">
+        <mat-icon>fork_right</mat-icon>
+        <span> {{ repository.forks_count | number }}</span>
+      </div>
+      <div class="search-result-info-item" title="Watchers">
+        <mat-icon>visibility</mat-icon>
+        <span> {{ repository.watchers_count | number }}</span>
+      </div>
+      <div class="search-result-info-item" title="Updated At">
+        <mat-icon>watch_later</mat-icon>
+        <span> {{ repository.updated_at | date: "medium" }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

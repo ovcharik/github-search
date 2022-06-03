@@ -1,0 +1,33 @@
+<!-- Loading -->
+<ng-container *ngIf="loading$ | async; else emptyTemplate">
+  <div class="search-loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-container>
+
+<!-- No result -->
+<ng-template #emptyTemplate>
+  <ng-container *ngIf="empty$ | async; else errorTemplate">
+    <h2 class="search-empty">
+      <mat-icon>sentiment_very_dissatisfied</mat-icon>
+      No result
+    </h2>
+  </ng-container>
+</ng-template>
+
+<!-- Error -->
+<ng-template #errorTemplate>
+  <ng-container *ngIf="error$ | async as error; else resultTemplate">
+    <div class="search-error">{{ error.message }}</div>
+  </ng-container>
+</ng-template>
+
+<!-- Repositories -->
+<ng-template #resultTemplate>
+  <app-repository
+    *ngFor="let item of items$ | async"
+    [repository]="item"
+    (search)="search.next($event)"
+  >
+  </app-repository>
+</ng-template>

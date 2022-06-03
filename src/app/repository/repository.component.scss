@@ -1,0 +1,32 @@
+:host {
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  mat-card-title a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  mat-card-subtitle * {
+    vertical-align: middle;
+  }
+
+  mat-card-subtitle mat-icon,
+  mat-chip {
+    cursor: pointer;
+  }
+
+  .search-result-info {
+    .search-result-info-item {
+      display: inline-block;
+      margin-right: 20px;
+
+      * {
+        vertical-align: middle;
+      }
+    }
+  }
+}

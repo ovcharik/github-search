@@ -1,0 +1,38 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+:host {
+  display: block;
+  height: 100%;
+
+  mat-drawer-container {
+    min-height: 100%;
+    overflow: auto;
+  }
+
+  mat-drawer-content {
+    width: 800px;
+    margin: 100px auto;
+    overflow: unset;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .search-sort-container {
+    margin-bottom: 20px;
+
+    .search-sort-item {
+      display: inline-block;
+      margin-right: 20px;
+      vertical-align: middle;
+    }
+  }
+
+  .sort-chips {
+    margin-bottom: 20px;
+    display: block;
+  }
+}

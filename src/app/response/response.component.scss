@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  margin-bottom: 20px;
+
+  .search-loading {
+    mat-spinner {
+      margin: auto;
+    }
+  }
+
+  .search-empty {
+    text-align: center;
+
+    * {
+      vertical-align: text-bottom;
+    }
+  }
+
+  .search-error {
+    color: brown;
+  }
+}
