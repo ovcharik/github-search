@@ -21,9 +21,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RepositoryComponent } from './repository/repository.component';
 import { ResponseComponent } from './response/response.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [AppComponent, RepositoryComponent, ResponseComponent],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -45,7 +46,10 @@ import { ResponseComponent } from './response/response.component';
 
     AppRoutingModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    RepositoryComponent,
+    ResponseComponent,
+  ],
 })
 export class AppModule {}

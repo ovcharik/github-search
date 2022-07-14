@@ -8,9 +8,10 @@
   }
 
   mat-drawer-content {
-    width: 800px;
-    margin: 100px auto;
+    max-width: 800px;
+    margin: 20px auto;
     overflow: unset;
+    padding: 0 10px;
   }
 
   .search-input {
