@@ -41,6 +41,8 @@ const searchParamsIsEqual = (
 export class AppComponent implements OnDestroy {
   destroy$ = new Subject<void>();
 
+  private searchInputUpdater$ = new Subject<string>();
+
   private localParams$ = new BehaviorSubject<SearchRepositoriesParams>({});
   private queryParams$ = this.activatedRouter.queryParams.pipe(
     map(fillSearchParamsWithDefault),
@@ -67,6 +69,12 @@ export class AppComponent implements OnDestroy {
     protected activatedRouter: ActivatedRoute,
     protected router: Router
   ) {
+    this.searchInputUpdater$
+      .pipe(debounceTime(400), takeUntil(this.destroy$))
+      .subscribe((searchInput) => {
+        this.updateLocalParams({ q: searchInput });
+      });
+
     this.params$.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.router.navigate([], {
         relativeTo: this.activatedRouter,
@@ -91,7 +99,7 @@ export class AppComponent implements OnDestroy {
   }
 
   setSearch(search: string | void) {
-    this.updateLocalParams({ q: search ?? '' });
+    this.searchInputUpdater$.next(search ?? '');
   }
 
   setPage(event: PageEvent) {
