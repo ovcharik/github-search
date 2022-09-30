@@ -72,7 +72,7 @@ export class AppComponent implements OnDestroy {
     this.searchInputUpdater$
       .pipe(debounceTime(400), takeUntil(this.destroy$))
       .subscribe((searchInput) => {
-        this.updateLocalParams({ q: searchInput });
+        this.updateLocalParams({ q: searchInput, page: 1 });
       });
 
     this.params$.pipe(takeUntil(this.destroy$)).subscribe((params) => {
@@ -112,7 +112,7 @@ export class AppComponent implements OnDestroy {
   removeChip(chip: SearchRepositoryChip) {
     const { type } = chip;
     if (type === 'reset' || type === 'search') {
-      this.updateLocalParams({ q: '' });
+      this.updateLocalParams({ q: '', page: 1 });
     }
     if (type === 'reset' || type === 'sort') {
       this.updateLocalParams({ sort: undefined, order: undefined });
